@@ -128,10 +128,7 @@ internetbs.prototype = {
         else {
             options.uri += '?' + params;
         }
-        console.log('options:', options);
         request(options, function(err, res, body) {
-            // callback(err, instance.parseResponseBody(body));
-            // console.log('body:', body);
             callback(err, body);
         });
         return this;
