@@ -103,4 +103,6 @@ Retrieve the list of DNS records for a specific domain.
 
 ## License
 
-This project is [UNLICENSED](http://unlicense.org/) and not endorsed by or affiliated with [Internet.bs](https://internetbs.net/).
+The MIT License (MIT)
+
+Not endorsed by or affiliated with [Internet.bs](https://internetbs.net/).
