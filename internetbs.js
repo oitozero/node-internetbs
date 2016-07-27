@@ -16,8 +16,7 @@ internetbs.prototype = {
                 return instance.command('Domain/Check', { domain: domain }, callback);
             },
             create: function(domain, years, params, callback) {
-                if(!domain)
-                throw new Error('You must include a domain name.');
+                if(!domain) throw new Error('You must include a domain name.');
                 var options = instance.defaults, k, y = parseInt(years);
                 if('[object Function]' == Object.prototype.toString.call(years)) {
                     callback = years;
@@ -41,9 +40,19 @@ internetbs.prototype = {
                 options.Period = years; // 1Y, 2Y up to 10Y
                 return instance.command('Domain/Create', options, callback);
             },
+            update: function(domain, params, callback){
+                if(!domain) throw new Error('You must include a domain name.');
+                var options = instance.defaults;
+                for(k in params) {
+                    if(params.hasOwnProperty(k)) {
+                        options[k] = params[k];
+                    }
+                }
+                options.Domain = domain;
+                return instance.command('Domain/Update', options, callback);
+            },
             getInfo: function(domain, callback) {
-                if(!domain)
-                    throw new Error('You must include a domain name.');
+                if(!domain) throw new Error('You must include a domain name.');
                 return instance.command('Domain/Info', { Domain: domain }, callback);
             },
             getList: function(params, callback) {
@@ -53,14 +62,36 @@ internetbs.prototype = {
                 }
                 return instance.command('Domain/List', params, callback);
             },
+            getRegistryStatus: function(domain, callback){
+                if(!domain) throw new Error('You must include a domain name.');
+                return instance.command('Domain/RegistryStatus', {Domain: domain}, callback);
+            },
+            registrarLock: {
+                enable: function(domain, callback){
+                    if(!domain) throw new Error('You must include a domain name.');
+                    return instance.command('Domain/RegistrarLock/Enable', {Domain: domain}, callback);
+                },
+                disable: function(domain, callback){
+                    if(!domain) throw new Error('You must include a domain name.');
+                    return instance.command('Domain/RegistrarLock/Disable', {Domain: domain}, callback);
+                },
+                status: function(domain, callback){
+                    if(!domain) throw new Error('You must include a domain name.');
+                    return instance.command('Domain/RegistrarLock/Status', {Domain: domain}, callback);
+                }
+            },
             ns: {
                 create: function(domain, host, callback) {
+                    if(!domain) throw new Error('You must include a domain name.');
+                    if(!host) throw new Error('You must include a domain name.');
                     return instance.command('Domain/Host/Create', {Domain: domain, Host: host}, callback);
                 },
                 getInfo: function(host, callback) {
+                    if(!host) throw new Error('You must include a host name.');
                     return instance.command('Domain/Host/Info', {host: host}, callback);
                 },
                 getList: function(domain, callback) {
+                    if(!domain) throw new Error('You must include a domain name.');
                     return instance.command('Domain/Host/List', {Domain: domain}, callback);
                 }
             },
@@ -115,7 +146,6 @@ internetbs.prototype = {
         var instance = this;
         params.ApiKey = this.api_key;
         params.Password = this.password;
-        // params.ClientIp = this.client_ip;
         params.ResponseFormat = 'JSON';
         var options = {
             method: method || 'GET',

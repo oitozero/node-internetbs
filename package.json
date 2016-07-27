@@ -1,6 +1,6 @@
 {
   "name": "internetbs",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "\"Node.js library for the Internet.bs API\"",
   "main": "./internetbs.js",
   "scripts": {

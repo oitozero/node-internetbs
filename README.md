@@ -27,7 +27,7 @@ Checks the availability of a domain
 		console.log(res);
 	});
 
-### internetbs.domains.create(domain [, years] [, params], callback)
+### internetbs.domains.create(domain, years, params, callback)
 
 Registers a new domain name. Optionally include `years` and `params` to set additional [required params](https://www.internetbs.net/ResellerRegistrarDomainNameAPI/). If `params` fields are not set, values from `internetbs.setDefaults` will be used.
 
@@ -36,6 +36,14 @@ Registers a new domain name. Optionally include `years` and `params` to set addi
 	});
 
 	internetbs.domains.create('example.com', { Registrant_FirstName: 'Pedro', ..... Billing_Email: 'pedro@oitozero.com' }, function(err, res) {
+		console.log(res);
+	});
+
+### internetbs.domains.update(domain, params, callback)
+
+Update a domain name. Optionally include `params` to set additional [required params](https://www.internetbs.net/ResellerRegistrarDomainNameAPI/). If `params` fields are not set, values from `internetbs.setDefaults` will be used.
+
+	internetbs.domains.update('example.com', {...}, function(err, res) {
 		console.log(res);
 	});
 
