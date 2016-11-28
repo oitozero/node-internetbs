@@ -3,8 +3,8 @@ var qs = require('querystring');
 var util = require('util');
 
 var internetbs = function(api_key, password, sandbox) {
-    this.api_key = (sandbox ? api_key : 'testapi');
-    this.password = (sandbox ? password : 'password');
+    this.api_key = (sandbox ? 'testapi' : api_key);
+    this.password = (sandbox ? 'password' : password);
     this.endpoint = 'https://' + (sandbox ? 'testapi' : 'api') + '.internet.bs';
     this.defaults = {};
 };
